@@ -49,13 +49,30 @@ class Flat(models.Model):
 
     new_building = models.BooleanField(blank=True,  null=True)
 
+    liked_by = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='liked_flats',
+        verbose_name='Кто лайкнул'
+    )
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
 class Complaint(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Кто жаловался', related_name='complaints')
-    flat = models.ForeignKey(Flat, on_delete=models.CASCADE, verbose_name='Квартира, на которую пожаловались', related_name='complaints')
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Кто жаловался',
+        related_name='complaints'
+    )
+    flat = models.ForeignKey(
+        Flat,
+        on_delete=models.CASCADE,
+        verbose_name='Квартира, на которую пожаловались',
+        related_name='complaints'
+    )
     complaint_text = models.TextField('Текст жалобы')
 
     def __str__(self):
