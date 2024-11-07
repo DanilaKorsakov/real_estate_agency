@@ -56,7 +56,7 @@ class Flat(models.Model):
         related_name='liked_flats',
         verbose_name='Кто лайкнул'
     )
-    owner_pure_phone = PhoneNumberField(blank=True, null=True)
+    owner_pure_phone = PhoneNumberField(blank=True, null=True, region="RU")
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
