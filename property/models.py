@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 class Flat(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200)
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
@@ -56,7 +54,6 @@ class Flat(models.Model):
         related_name='liked_flats',
         verbose_name='Кто лайкнул'
     )
-    owner_pure_phone = PhoneNumberField(blank=True, null=True, verbose_name ='Нормализованный номер владельца')
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
